@@ -13,7 +13,7 @@ Como não foi claramente espeficiado. Foi levado em consideração que:
 - Todas as informações do título precisam estar devidamente preenchidas para sua importação.
 
 - No XML apresentado, vem o atributo protocolo, porém pela descrição do desafio era para ser criado pelo banco de dados,
-será criado um atributo 'protocolo_arquivo' apenas para importação desse elemento, porém o protocolo será construído como orientado
-no desafio não utilozando esse dado.
+será criado uma coluna 'protocolo_arquivo' apenas para importação desse elemento, porém o protocolo será construído como orientado
+no desafio não utilizando esse citado mais acima.
 
 - Para os documentos tanto de Credor/Devedor/Apresentante foi considerado CPF ou CNPJ.
