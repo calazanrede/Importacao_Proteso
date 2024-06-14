@@ -29,10 +29,16 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormImportacao));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.consultarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ajudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.edtDocApresentante = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.edtNomeApresentante = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.edtDocCredor = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.edtNomeCredor = new System.Windows.Forms.TextBox();
@@ -50,11 +56,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dgvTitulos = new System.Windows.Forms.DataGridView();
-            this.ajudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.edtNomeApresentante = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.edtDocApresentante = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -91,6 +92,15 @@
             this.importarToolStripMenuItem.Text = "Importar";
             this.importarToolStripMenuItem.Click += new System.EventHandler(this.importarToolStripMenuItem_Click);
             // 
+            // ajudaToolStripMenuItem
+            // 
+            this.ajudaToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.ajudaToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("ajudaToolStripMenuItem.Image")));
+            this.ajudaToolStripMenuItem.Name = "ajudaToolStripMenuItem";
+            this.ajudaToolStripMenuItem.Size = new System.Drawing.Size(78, 25);
+            this.ajudaToolStripMenuItem.Text = "Ajuda";
+            this.ajudaToolStripMenuItem.Click += new System.EventHandler(this.ajudaToolStripMenuItem_Click);
+            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.AliceBlue;
@@ -119,6 +129,44 @@
             this.panel1.Size = new System.Drawing.Size(223, 532);
             this.panel1.TabIndex = 1;
             // 
+            // edtDocApresentante
+            // 
+            this.edtDocApresentante.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.edtDocApresentante.Location = new System.Drawing.Point(3, 495);
+            this.edtDocApresentante.Name = "edtDocApresentante";
+            this.edtDocApresentante.Size = new System.Drawing.Size(214, 26);
+            this.edtDocApresentante.TabIndex = 18;
+            this.edtDocApresentante.KeyDown += new System.Windows.Forms.KeyEventHandler(this.buscarComEnter);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label10.Location = new System.Drawing.Point(0, 475);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(169, 17);
+            this.label10.TabIndex = 17;
+            this.label10.Text = "Documento Apresentante";
+            // 
+            // edtNomeApresentante
+            // 
+            this.edtNomeApresentante.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.edtNomeApresentante.Location = new System.Drawing.Point(3, 437);
+            this.edtNomeApresentante.Name = "edtNomeApresentante";
+            this.edtNomeApresentante.Size = new System.Drawing.Size(214, 26);
+            this.edtNomeApresentante.TabIndex = 16;
+            this.edtNomeApresentante.KeyDown += new System.Windows.Forms.KeyEventHandler(this.buscarComEnter);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label9.Location = new System.Drawing.Point(0, 417);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(134, 17);
+            this.label9.TabIndex = 15;
+            this.label9.Text = "Nome Apresentante";
+            // 
             // edtDocCredor
             // 
             this.edtDocCredor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
@@ -127,6 +175,7 @@
             this.edtDocCredor.Size = new System.Drawing.Size(214, 26);
             this.edtDocCredor.TabIndex = 14;
             this.edtDocCredor.TextChanged += new System.EventHandler(this.edtDocCredor_TextChanged);
+            this.edtDocCredor.KeyDown += new System.Windows.Forms.KeyEventHandler(this.buscarComEnter);
             this.edtDocCredor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numbers_keyPress);
             // 
             // label8
@@ -146,6 +195,7 @@
             this.edtNomeCredor.Name = "edtNomeCredor";
             this.edtNomeCredor.Size = new System.Drawing.Size(214, 26);
             this.edtNomeCredor.TabIndex = 12;
+            this.edtNomeCredor.KeyDown += new System.Windows.Forms.KeyEventHandler(this.buscarComEnter);
             // 
             // label7
             // 
@@ -165,6 +215,7 @@
             this.edtDocDevedor.Size = new System.Drawing.Size(214, 26);
             this.edtDocDevedor.TabIndex = 10;
             this.edtDocDevedor.TextChanged += new System.EventHandler(this.edtDocDevedor_TextChanged);
+            this.edtDocDevedor.KeyDown += new System.Windows.Forms.KeyEventHandler(this.buscarComEnter);
             this.edtDocDevedor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numbers_keyPress);
             // 
             // label6
@@ -184,6 +235,7 @@
             this.edtNomeDevedor.Name = "edtNomeDevedor";
             this.edtNomeDevedor.Size = new System.Drawing.Size(214, 26);
             this.edtNomeDevedor.TabIndex = 8;
+            this.edtNomeDevedor.KeyDown += new System.Windows.Forms.KeyEventHandler(this.buscarComEnter);
             // 
             // label5
             // 
@@ -202,6 +254,7 @@
             this.edtNumTit.Name = "edtNumTit";
             this.edtNumTit.Size = new System.Drawing.Size(214, 26);
             this.edtNumTit.TabIndex = 6;
+            this.edtNumTit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.buscarComEnter);
             // 
             // label4
             // 
@@ -255,6 +308,7 @@
             this.edtProtocolo.Name = "edtProtocolo";
             this.edtProtocolo.Size = new System.Drawing.Size(214, 26);
             this.edtProtocolo.TabIndex = 1;
+            this.edtProtocolo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.buscarComEnter);
             this.edtProtocolo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numbers_keyPress);
             // 
             // label1
@@ -281,8 +335,18 @@
             this.dgvTitulos.AllowUserToAddRows = false;
             this.dgvTitulos.AllowUserToDeleteRows = false;
             this.dgvTitulos.AllowUserToOrderColumns = true;
+            this.dgvTitulos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvTitulos.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvTitulos.BackgroundColor = System.Drawing.Color.SeaShell;
             this.dgvTitulos.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvTitulos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvTitulos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTitulos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvTitulos.Location = new System.Drawing.Point(0, 0);
@@ -290,51 +354,6 @@
             this.dgvTitulos.ReadOnly = true;
             this.dgvTitulos.Size = new System.Drawing.Size(761, 532);
             this.dgvTitulos.TabIndex = 0;
-            // 
-            // ajudaToolStripMenuItem
-            // 
-            this.ajudaToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.ajudaToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("ajudaToolStripMenuItem.Image")));
-            this.ajudaToolStripMenuItem.Name = "ajudaToolStripMenuItem";
-            this.ajudaToolStripMenuItem.Size = new System.Drawing.Size(78, 25);
-            this.ajudaToolStripMenuItem.Text = "Ajuda";
-            this.ajudaToolStripMenuItem.Click += new System.EventHandler(this.ajudaToolStripMenuItem_Click);
-            // 
-            // edtNomeApresentante
-            // 
-            this.edtNomeApresentante.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.edtNomeApresentante.Location = new System.Drawing.Point(3, 437);
-            this.edtNomeApresentante.Name = "edtNomeApresentante";
-            this.edtNomeApresentante.Size = new System.Drawing.Size(214, 26);
-            this.edtNomeApresentante.TabIndex = 16;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label9.Location = new System.Drawing.Point(0, 417);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(134, 17);
-            this.label9.TabIndex = 15;
-            this.label9.Text = "Nome Apresentante";
-            // 
-            // edtDocApresentante
-            // 
-            this.edtDocApresentante.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.edtDocApresentante.Location = new System.Drawing.Point(3, 495);
-            this.edtDocApresentante.Name = "edtDocApresentante";
-            this.edtDocApresentante.Size = new System.Drawing.Size(214, 26);
-            this.edtDocApresentante.TabIndex = 18;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label10.Location = new System.Drawing.Point(0, 475);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(169, 17);
-            this.label10.TabIndex = 17;
-            this.label10.Text = "Documento Apresentante";
             // 
             // FormImportacao
             // 
@@ -346,7 +365,6 @@
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.MaximumSize = new System.Drawing.Size(1000, 600);
             this.Name = "FormImportacao";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Importação de títulos";

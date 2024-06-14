@@ -50,7 +50,6 @@ public class ConexaoBanco
                 conn.Open();
                 SqlCommand cmd = new SqlCommand(querySql, conn);
 
-                // Adicionar parâmetros, se houver
                 if (parametros != null)
                 {
                     cmd.Parameters.AddRange(parametros);

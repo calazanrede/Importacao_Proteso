@@ -6,6 +6,9 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Text;
 using Importacao_Proteso.Controllers;
+using System.ComponentModel;
+using System.Data;
+using Importacao_Proteso.Views;
 
 namespace Importacao_Proteso
 {
@@ -70,11 +73,84 @@ namespace Importacao_Proteso
         {
             try
             {
-                string sql = "select ";
+                BackgroundWorker bg = new BackgroundWorker(); 
+                DataTable dt = new DataTable();
+                string protocolo = edtProtocolo.Text;
+                string dataApresentacao = "";
+                if (!string.IsNullOrEmpty(dtData.Text.Trim())) // Não definir data na pesquisa caso esteja vazia
+                    dataApresentacao = dtData.Value.ToString("yyyy-MM-dd");
+                string numeroTitulo = edtNumTit.Text;
+                string nomeDevedor = edtNomeDevedor.Text;
+                string docDevedor = Uteis.retornarNumeros(edtDocDevedor.Text);
+                string nomeCredor = edtNomeCredor.Text;
+                string docCredor = Uteis.retornarNumeros(edtDocCredor.Text);
+                string nomeApresentante = edtNomeApresentante.Text;
+                string docApresentante = Uteis.retornarNumeros(edtDocApresentante.Text);
+                bg.DoWork += new DoWorkEventHandler((object sender, DoWorkEventArgs e) => // Colocado em Background considerando que o teste pode ser feito com uma quantidade amis roubsta de dados
+                {
+                    dt = new CtrTitulo().consultarTitulos(protocolo,dataApresentacao,numeroTitulo,nomeDevedor,docDevedor,nomeCredor,docCredor,nomeApresentante,docApresentante);
+                });
+                bg.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler((object sender, RunWorkerCompletedEventArgs e) =>
+                {
+                    if(dt.Rows.Count > 0)
+                    {
+                        dgvTitulos.DataSource = dt;
+                        addBotaoAbrir(ref dgvTitulos);
+                    }
+                    else
+                    {
+                        dgvTitulos.DataSource = null;
+                        if (dgvTitulos.Columns["Abrir"] != null)
+                        {
+                            dgvTitulos.Columns.Remove("Abrir");
+                        }
+                        MessageBox.Show("Nenhum título encontrado na pesquisa.","ATENÇÃO",MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                });
+                bg.RunWorkerAsync();
             }
             catch (Exception ee)
             {
                 MessageBox.Show($"Erro ao pesquisar títulos solicitados.\n {ee.Message}", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        /// <summary>
+        /// Adicionar botão de abrir ao DataGridView para abrir informações sobre o título desejado
+        /// </summary>
+        /// <param name="dgvTitulos"></param>
+        public void addBotaoAbrir(ref DataGridView dgvTitulos)
+        {
+            try
+            {
+                bool entro = false;
+                if (dgvTitulos.Rows.Count > 0)
+                {
+                    if (dgvTitulos.Columns.Count > 0)
+                    {
+                        foreach (DataGridViewColumn item in dgvTitulos.Columns)
+                        {
+                            if (item.Name == "Abrir")
+                            {
+                                dgvTitulos.Columns.Remove(item);
+                                entro = true;
+                                break;
+                            }
+                        }
+                    }
+                    DataGridViewButtonColumn Abrir = new System.Windows.Forms.DataGridViewButtonColumn();
+                    Abrir.HeaderText = "Abrir";
+                    Abrir.Name = "Abrir";
+                    Abrir.Text = "Abrir título";
+                    Abrir.UseColumnTextForButtonValue = true;
+                    dgvTitulos.Columns.Add(Abrir);
+                    dgvTitulos.Columns["Abrir"].DisplayIndex = 0;
+                    if (entro == false)
+                        dgvTitulos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(dgvTitulos_CellClick);
+                }
+            }
+            catch (Exception)
+            {
+
             }
         }
 
@@ -211,6 +287,45 @@ namespace Importacao_Proteso
             {
                 MessageBox.Show($"Erro ao importar títulos pelo XML. Verifique se o formato do arquivo está correto.\n {ee.Message}", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void dgvTitulos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if(e.ColumnIndex != -1 && e.RowIndex != -1)
+                {
+                    if (dgvTitulos.Columns[e.ColumnIndex].Name.ToUpper() == "ABRIR")
+                    {
+                        CtrTitulo ctr = new CtrTitulo();
+                        int.TryParse(dgvTitulos.Rows[e.RowIndex].Cells["Protocolo"].Value.ToString(), out int protocolo);
+                        Titulo t = ctr.abrirTitulo(protocolo);
+                        if(t != null) 
+                        { 
+                            FormTitulo frm = new FormTitulo(t);
+                            frm.Show();
+                        }
+                    }
+                }
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show($"Ocooreu um erro ao tentar abrir o título.\n {ee.Message}", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Fazer pesquisa sempre que o usuário teclar ENTER em algum dos campos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buscarComEnter(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                pesquisa();
+            }
+            
         }
     }
 }

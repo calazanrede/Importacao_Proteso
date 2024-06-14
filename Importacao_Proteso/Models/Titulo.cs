@@ -22,19 +22,22 @@ namespace Importacao_Proteso.Models
         public long Protocolo { get; set; }
         public DateTime data_apresentacao { get; set; }
         public decimal valor_custas { get; set; }
-        public Titulo(Titulo_Arquivo tituloArquivo)
+        public Titulo(Titulo_Arquivo tituloArquivo = null)
         {
-            this.protocolo_arquivo = tituloArquivo.protocolo_arquivo;
-            this.numero_titulo = tituloArquivo.numero_titulo;
-            this.nome_devedor = tituloArquivo.nome_devedor;
-            this.documento_devedor = tituloArquivo.documento_devedor;
-            this.nome_apresentante = tituloArquivo.nome_apresentante;
-            this.documento_apresentante = tituloArquivo.documento_apresentante;
-            this.nome_credor = tituloArquivo.nome_credor;
-            this.documento_credor = tituloArquivo.documento_credor;
-            this.valor_titulo = tituloArquivo.valor_titulo;
-            this.data_emissao = tituloArquivo.data_emissao;
-            this.especie_titulo = tituloArquivo.especie_titulo;
+            if (tituloArquivo != null)
+            {
+                this.protocolo_arquivo = tituloArquivo.protocolo_arquivo;
+                this.numero_titulo = tituloArquivo.numero_titulo;
+                this.nome_devedor = tituloArquivo.nome_devedor;
+                this.documento_devedor = tituloArquivo.documento_devedor;
+                this.nome_apresentante = tituloArquivo.nome_apresentante;
+                this.documento_apresentante = tituloArquivo.documento_apresentante;
+                this.nome_credor = tituloArquivo.nome_credor;
+                this.documento_credor = tituloArquivo.documento_credor;
+                this.valor_titulo = tituloArquivo.valor_titulo;
+                this.data_emissao = tituloArquivo.data_emissao;
+                this.especie_titulo = tituloArquivo.especie_titulo;
+            }
         }
     }
 }
