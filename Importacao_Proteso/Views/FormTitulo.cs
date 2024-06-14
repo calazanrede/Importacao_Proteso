@@ -136,8 +136,9 @@ namespace Importacao_Proteso.Views
                 titulo.nome_apresentante = edtNomeApresentante.Text;
                 titulo.nome_devedor = edtNomeDevedor.Text;
 
-                titulo.valor_titulo = Convert.ToDecimal(edtValor.Text.Replace(",", "."));
-                titulo.valor_custas = Convert.ToDecimal(edtCustas.Text.Replace(",", "."));
+                titulo.valor_titulo = Convert.ToDecimal(edtValor.Text);
+                AtualizarValorCustas();
+                titulo.valor_custas = Convert.ToDecimal(edtCustas.Text);
 
                 titulo.documento_apresentante = LimparFormatacao(edtDocApresentante.Text);
                 titulo.documento_credor = LimparFormatacao(edtDocumentoCredor.Text);
