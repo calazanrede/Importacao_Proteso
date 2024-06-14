@@ -1,9 +1,10 @@
+#INSTRUÇÕES# 
+Para executar, pegue o arquivo 'bkp-desafio_tec21' presente na pasta e restaure.
+Trocar a String de conexão na LINHA 21 no Program.cs para a conexão do banco de dados que está sendo utilizado.
+
 Explicação: 
 Foi feita uma solução simplificada utilizando um banco de dados teste em SQLServer Express (versão gratuita) e comandos SQL simples pelo sistema.
 Também foi desenvolvida uma interface um pouco intuitiva e interativa para facilitar os testes.
-
-##IMPORTANTE## 
-Para executar as operações, troque a String de conexão na LINHA 21 no Program.cs para a conexão do banco de dados que está sendo utilizado.
 
 Constatações:
 Como não foi claramente espeficiado. Foi levado em consideração que:
