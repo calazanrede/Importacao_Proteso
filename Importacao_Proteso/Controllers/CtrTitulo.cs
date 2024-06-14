@@ -140,7 +140,7 @@ namespace Importacao_Proteso.Controllers
             }
             catch (Exception ee)
             {
-                MessageBox.Show($"Ocorreu um erro ao tentar inserir títulos no banco de dados.\n{ee.Message}", "ATENÇÃO", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Ocorreu um erro ao tentar inserir títulos no banco de dados, verifique a string de conexão.\n{ee.Message}", "ATENÇÃO", MessageBoxButton.OK, MessageBoxImage.Error);
                 throw ee;
             }
         }
@@ -244,9 +244,10 @@ namespace Importacao_Proteso.Controllers
                 dt = cs.ConsultaSql(sql, parametros.ToArray());
                 return dt;
             }
-            catch (Exception)
+            catch (Exception ee)
             {
-                throw;
+                MessageBox.Show($"Ocorreu um erro ao fazer a consulta, verifique a string de conexão.\n{ee.Message}", "ATENÇÃO", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw ee;
             }
         }
         /// <summary>
